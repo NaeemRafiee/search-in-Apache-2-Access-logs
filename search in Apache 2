@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+#clone git
+git clone https://github.com/40021441054102/OS-Lab-Projects.git
+cd OS-Lab-Projects/Analyze-Apache-Logs
+
+echo "search iran ip in apache_logs file : "
+
+#Exteract Iran_Ip from ir.csv file
+awk -F. '{print $1"."$2"."$3}' ir.csv > exteracted_ip.txt
+
+#search in apache_logs file
+while read ip; do
+        grep "$ip" apache_logs.log >> iran_requests.log
+ done < exteracted_ip.txt
+        echo "End of search.result seved in iran_requests.log file !"
